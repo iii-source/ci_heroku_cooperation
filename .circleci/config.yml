@@ -17,7 +17,7 @@ jobs:
 #          only-branch: master
       - run:
           name: login
-          command: heroku login
+          command: heroku login --interactive
       - run:
           name: git
           command: |
