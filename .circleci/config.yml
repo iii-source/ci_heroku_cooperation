@@ -16,8 +16,8 @@ jobs:
 #      - heroku/deploy-via-git:
 #          only-branch: master
       - run:
-          name: login
-          command: heroku login --interactive
+          name: remote
+          command: heroku git:remote -a $HEROKU_APP_NAME
       - run:
           name: git
           command: |
