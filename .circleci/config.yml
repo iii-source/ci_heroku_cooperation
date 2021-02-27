@@ -20,7 +20,7 @@ jobs:
       - run: echo ${HEROKU_API_KEY}
       - run: echo https://heroku:$HEROKU_API_KEY
       - run: echo https://heroku:${HEROKU_API_KEY}
-      - run: heroku login --interactive 
+      - run: heroku login 
       - run:
           name: git
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
