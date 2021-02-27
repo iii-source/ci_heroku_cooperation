@@ -13,4 +13,4 @@ jobs:
     steps:
       - checkout
       - heroku/deploy-via-git:
-          only-branch: main
+          only-branch: master
