@@ -6,7 +6,7 @@ orbs:
 workflows:
   heroku_deploy:
     jobs:
-      - deploy
+      - deploy:
           context: CI-API
 jobs:
   deploy:
