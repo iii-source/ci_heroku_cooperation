@@ -12,6 +12,18 @@ jobs:
     executor: heroku/default
     steps:
       - checkout
+      - run:
+          name: pwd test
+          command: pwd
+      - run:
+          name: ls test
+          command: ls
       - heroku/install
+      - run:
+          name: pwd test after install
+          command: pwd
+      - run:
+          name: ls test after install
+          command: ls
       - heroku/deploy-via-git:
-          only-branch: master 
+          only-branch: master
