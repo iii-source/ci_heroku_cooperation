@@ -7,6 +7,7 @@ workflows:
   heroku_deploy:
     jobs:
       - deploy
+          context: CI-API
 jobs:
   deploy:
     executor: heroku/default
