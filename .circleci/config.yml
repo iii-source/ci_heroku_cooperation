@@ -17,7 +17,7 @@ jobs:
 #          only-branch: master
       - run:
           name: remote
-          command: heroku git:remote -a $HEROKU_APP_NAME
+          command: git config --global url.ssh://git@heroku.com/.insteadOf https://git.heroku.com/
       - run:
           name: git
           command: |
