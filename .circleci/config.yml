@@ -12,5 +12,8 @@ jobs:
     executor: heroku/default
     steps:
       - checkout
+      - run:
+        name: heroku login
+        command: heroku login
       - heroku/deploy-via-git:
           only-branch: main
