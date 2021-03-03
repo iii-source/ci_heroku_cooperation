@@ -24,5 +24,6 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
+            - "/home/circleci/circleci-demo-python-django/"
       - run: ls -a /home/circleci/circleci-demo-python-django/
 
