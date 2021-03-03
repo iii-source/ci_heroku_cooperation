@@ -23,5 +23,8 @@ jobs:
       - run: pip install -r requirements.txt
       # server起動
       - run: python server/app.py&
+      - run: ifconfig
+      - run: curl http://127.0.0.1/
+
       # テスト実行
       - run: pytest tests/test_hello.py
