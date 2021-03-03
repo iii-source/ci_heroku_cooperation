@@ -1,4 +1,3 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
 orbs:
@@ -7,16 +6,26 @@ workflows:
   heroku_deploy:
     jobs:
       - deploy:
-          context: CI-API
+
 jobs:
   deploy:
-    executor: heroku/default
+    executor: circleci/python:3.6.4
     steps:
       - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          only-branch: main
-#      - run: heroku login
-#      - run:
-#          name: git
-#          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git main
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
+      # restore_cache キャッシュされたファイルまたはディレクトリを復元
+      - restore_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
+
+
