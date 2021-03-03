@@ -22,6 +22,6 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
       - run: pip install -r requirements.txt
       # server起動
-      - run: python server/app.py
+      - run: python server/app.py&
       # テスト実行
       - run: pytest tests/test_hello.py
