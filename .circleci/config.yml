@@ -21,6 +21,6 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
       # server起動
-      - run: python server.app.py
+      - run: python .server.app.py
       # テスト実行
-      - run: pytest tests.test_hello.py
+      - run: pytest .tests.test_hello.py
