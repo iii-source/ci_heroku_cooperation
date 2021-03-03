@@ -21,6 +21,8 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
       - run: ls -la
+      - run: cat server.app.py
+      - run: cat .server.app.py
       # server起動
       - run: python .server.app.py
       # テスト実行
