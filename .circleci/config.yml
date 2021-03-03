@@ -9,10 +9,6 @@ jobs:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - run: ls -a /home/circleci/circleci-demo-python-django/
-      # restore_cache キャッシュされたファイルまたはディレクトリを復元
-      - restore_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
@@ -24,6 +20,3 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
-            - "/home/circleci/circleci-demo-python-django/"
-      - run: ls -a /home/circleci/circleci-demo-python-django/
-
