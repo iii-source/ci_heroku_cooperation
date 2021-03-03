@@ -20,6 +20,7 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
+      - run: ls -la
       # server起動
       - run: python .server.app.py
       # テスト実行
