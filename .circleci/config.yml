@@ -1,15 +1,10 @@
 version: 2.1
 
-orbs:
-  heroku: circleci/heroku@0.0.8
-workflows:
-  heroku_deploy:
-    jobs:
-      - deploy:
-
 jobs:
-  deploy:
-    executor: circleci/python:3.6.4
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.6.4
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
@@ -26,6 +21,7 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
+            - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
 
 
