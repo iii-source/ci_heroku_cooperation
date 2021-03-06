@@ -21,12 +21,13 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
             - "/usr/local/lib/python3.6/site-packages"
       - run: pip install -r requirements.txt
+      - run: python hello.py
       # server起動
       - run:
           command: python server/app.py
           background: true
-      - run: ifconfig
-      - run: curl http://127.0.0.1:5000/
+          - run: ifconfig
+          - run: curl http://127.0.0.1:5000/
 
       # テスト実行
       - run: pytest tests/test_hello.py
