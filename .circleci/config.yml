@@ -24,10 +24,9 @@ jobs:
       - run: python hello.py
       # server起動
       - run:
-          command: python server/app.py
+          command: python server/app.py && curl http://127.0.0.1:5000/
           background: true
-      - run: ifconfig
-      - run: curl http://127.0.0.1:5000/
+#      - run: curl http://127.0.0.1:5000/
 
       # テスト実行
-      - run: pytest tests/test_hello.py
+#      - run: pytest tests/test_hello.py
