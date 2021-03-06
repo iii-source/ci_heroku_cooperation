@@ -1,32 +1,26 @@
 version: 2.1
 
 jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
+  run_tests:
     docker:
-      - image: circleci/python:3.6.4
+      - image: circleci/python:3.7.4
     steps:
       - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - run:
+          name: Install Python Dependencies
           command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
-            - "/usr/local/lib/python3.6/site-packages"
-      - run: pip install -r requirements.txt
-      - run: python hello.py
-      # server起動
+            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
+            pip install --user -r requirements.txt
       - run:
-          command: python server/app.py && curl http://127.0.0.1:5000/
-          background: true
-#      - run: curl http://127.0.0.1:5000/
+          name: Run Unit Tests
+          command: |
+            pytest --junitxml=test-reports/junit.xml --html=test-reports/pytest_report.html --self-contained-html
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
 
-      # テスト実行
-#      - run: pytest tests/test_hello.py
+workflows:
+  build_test:
+    jobs:
+     - run_tests
