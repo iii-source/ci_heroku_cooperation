@@ -12,8 +12,8 @@ jobs:
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
       - run:
-          command: python server/app.py && sleep 30
-          background: true
+          command: python server/app.py # && sleep 30
+#          background: true
   api_test:
     docker:
       - image: circleci/python:3.7.4
