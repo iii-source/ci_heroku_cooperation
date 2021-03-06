@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  run_tests:
+  build_api_start-up:
     docker:
       - image: circleci/python:3.7.4
     steps:
@@ -11,21 +11,20 @@ jobs:
           command: |
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
-      pre:
-        - run:
-            command: python server/app.py
-            background: true
-
-      test:
-        override:
-          - pwd ~
-          - ifconfig
-          - echo HelloWorld
-          - curl http://127.0.0.1/example
-          - exit 0
+      - run:
+          command: python server/app.py
+          background: true
+  api_test-up:
+    docker:
+      - image: circleci/python:3.7.4
+    steps:
+      - run: curl http://127.0.0.1:5000/
 
 
 workflows:
   build_test:
     jobs:
-     - run_tests
+     - build_api_start-up
+     - api_test:
+        requires:
+            - build_api_start
