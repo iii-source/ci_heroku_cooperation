@@ -23,7 +23,7 @@ jobs:
       - run: pip install -r requirements.txt
       # server起動
       - run:
-          commando: python server/app.py
+          command: python server/app.py
           background: true
       - run: ifconfig
       - run: curl http://127.0.0.1:5000/
