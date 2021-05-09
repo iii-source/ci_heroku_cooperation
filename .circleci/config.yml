@@ -16,41 +16,43 @@ jobs:
       - run:
           command: python server/app.py
           background: true
+      - run: curl http://127.0.0.1:5000/
+
 
       # リモート仮想環境を保存
-      - setup_remote_docker
-      # 
-      - run: docker images
-      - run:
-          name: Save image
-          command: |
-            mkdir -p /tmp/docker
-            docker save hoge/fuga:latest -o /tmp/docker/image
-      - persist_to_workspace:
-          root: /tmp/docker
-          paths:
-            - image
+#      - setup_remote_docker
+#      #
+#      - run: docker images
+#      - run:
+#          name: Save image
+#          command: |
+#            mkdir -p /tmp/docker
+#            docker save hoge/fuga:latest -o /tmp/docker/image
+#      - persist_to_workspace:
+#          root: /tmp/docker
+#          paths:
+#            - image
 
-  api_test:
-    docker:
-      - image: circleci/python:3.7.4
-    steps:
-      - run: pwd
-      - run: ls -la
-
-      - attach_workspace:
-          at: /tmp/docker
-      - setup_remote_docker
-      - run: docker load -i /tmp/docker/image
-
-      - run: pwd
-      - run: ls -la
-      - run: curl http://127.0.0.1:5000/
+#  api_test:
+#    docker:
+#      - image: circleci/python:3.7.4
+#    steps:
+#      - run: pwd
+#      - run: ls -la
+#
+#      - attach_workspace:
+#          at: /tmp/docker
+#      - setup_remote_docker
+#      - run: docker load -i /tmp/docker/image
+#
+#      - run: pwd
+#      - run: ls -la
+#      - run: curl http://127.0.0.1:5000/
 
 workflows:
   build_test:
     jobs:
      - build_api_start_up
-     - api_test:
-        requires:
-          - build_api_start_up
+#     - api_test:
+#        requires:
+#          - build_api_start_up
