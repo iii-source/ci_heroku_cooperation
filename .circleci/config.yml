@@ -25,38 +25,38 @@ jobs:
             pip install --user -r requirements.txt
       - run: pwd
       - run: ls -la
-      - run:
-          command: python server/app.py
-          background: true
+#      - run:
+#          command: python server/app.py
+#          background: true
 
-      - run: sleep 10
-      - run: curl http://127.0.0.1:5000/
-      - run: pytest
-
-
-
-
-#  api_test:
-#    docker:
-#      - image: circleci/python:3.7.4
-#    steps:
-#      - run: pwd
-#      - run: ls -la
-#
-#      # job間で共有できるスペース
-#      - attach_workspace:
-#          at: /tmp/flask_app
-#
-#     - run: cd /tmp/flask_app
-#      - run: pwd
-#      - run: ls -la
+#      - run: sleep 10
 #      - run: curl http://127.0.0.1:5000/
 #      - run: pytest
+
+
+
+
+  api_test:
+    docker:
+      - image: circleci/python:3.7.4
+    steps:
+      - run: pwd
+      - run: ls -la
+
+      # job間で共有できるスペース
+      - attach_workspace:
+          at: /tmp/flask_app
+
+     - run: cd /tmp/flask_app
+     - run: pwd
+     - run: ls -la
+     - run: curl http://127.0.0.1:5000/
+     - run: pytest
 
 workflows:
   build_test:
     jobs:
      - build_api_start_up
-#     - api_test:
-#        requires:
-#          - build_api_start_up
+     - api_test:
+        requires:
+          - build_api_start_up
