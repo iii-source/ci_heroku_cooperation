@@ -11,9 +11,23 @@ jobs:
           command: |
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
-#      - run:
-#          command: python server/app.py
-#          background: true
+      - run: pwd
+      - run: ls -la
+      - run:
+          command: python server/app.py
+          background: true
+
+      # リモート仮想環境を保存
+      - setup_remote_docker
+      - run:
+          name: Save image
+          command: |
+            mkdir -p /tmp/docker
+            docker save hoge/fuga:latest -o /tmp/docker/image
+      - persist_to_workspace:
+          root: /tmp/docker
+          paths:
+            - image
 
   api_test:
     docker:
@@ -21,16 +35,20 @@ jobs:
     steps:
       - run: pwd
       - run: ls -la
-      - run: sleep 20
+
+      - attach_workspace:
+          at: /tmp/docker
+      - setup_remote_docker
+      - run: docker load -i /tmp/docker/image
+
       - run: pwd
       - run: ls -la
-      - run:
-          command: python server/app.py
-          background: true
       - run: curl http://127.0.0.1:5000/
 
 workflows:
   build_test:
     jobs:
      - build_api_start_up
-     - api_test
+     - api_test:
+        requires:
+          - build_api_start_up
