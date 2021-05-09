@@ -56,6 +56,13 @@ jobs:
             pwd
             ls -la
             cd flask_app
+            ls -la
+            python server/app.py
+            sleep 10
+            curl http://127.0.0.1:5000/
+            pytest
+          background: true
+
 
 #      - run: pwd
 #      - run: ls -la
