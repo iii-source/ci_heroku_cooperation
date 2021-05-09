@@ -16,6 +16,8 @@ jobs:
       - run:
           command: python server/app.py
           background: true
+
+      - run: sleep 10
       - run: curl http://127.0.0.1:5000/
 
 
