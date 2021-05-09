@@ -11,7 +11,9 @@ jobs:
             mkdir -p /tmp/flask_app
       # 一時ファイルの永続化
       - persist_to_workspace:
-          root: /tmp/flask_app
+          root: /tmp
+          paths:
+            - flask_app
 
       - run: cd /tmp/flask_app
 
