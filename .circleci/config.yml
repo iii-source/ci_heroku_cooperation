@@ -19,6 +19,8 @@ jobs:
 
       # リモート仮想環境を保存
       - setup_remote_docker
+      # 
+      - run: docker images
       - run:
           name: Save image
           command: |
