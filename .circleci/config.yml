@@ -54,7 +54,9 @@ jobs:
           command: |
             cd /tmp/flask_app
             pwd
-            ls
+            ls -la
+            cd flask_app
+
 #      - run: pwd
 #      - run: ls -la
 #      - run:
