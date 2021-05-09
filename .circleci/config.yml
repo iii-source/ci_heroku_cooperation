@@ -15,14 +15,19 @@ jobs:
           paths:
             - flask_app
 
-      - run: cd /tmp/flask_app
+#      - run: cd /tmp/flask_app
 
       - checkout
       - run:
           name: Install Python Dependencies
           command: |
+            pwd
+            ls
+            cd /tmp/flask_app
             echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV && source $BASH_ENV
             pip install --user -r requirements.txt
+            pwd
+            ls
       - run: pwd
       - run: ls -la
 #      - run:
@@ -44,11 +49,19 @@ jobs:
       - attach_workspace:
           at: /tmp/flask_app
 
-      - run: cd /tmp/flask_app
-      - run: pwd
-      - run: ls -la
-      - run: curl http://127.0.0.1:5000/
-      - run: pytest
+      - run:
+          command: |
+            cd /tmp/flask_app
+            pwd
+            ls
+#      - run: pwd
+#      - run: ls -la
+#      - run:
+#          command: python server/app.py
+#          background: true
+#      - run: sleep 10
+#      - run: curl http://127.0.0.1:5000/
+#      - run: pytest
 
 workflows:
   build_test:
