@@ -19,21 +19,18 @@ jobs:
 
       - run: sleep 10
       - run: curl http://127.0.0.1:5000/
+      - run: pytest
 
-
-      # リモート仮想環境を保存
-#      - setup_remote_docker
-#      #
-#      - run: docker images
 #      - run:
-#          name: Save image
+#          name: create tmp
 #          command: |
-#            mkdir -p /tmp/docker
-#            docker save hoge/fuga:latest -o /tmp/docker/image
+#            mkdir -p /tmp/flask_app
+#      # 一時ファイルの永続化
 #      - persist_to_workspace:
-#          root: /tmp/docker
-#          paths:
-#            - image
+#          root: /tmp/flask_app
+#
+#      - run: cd /tmp/flask_app
+
 
 #  api_test:
 #    docker:
@@ -42,14 +39,15 @@ jobs:
 #      - run: pwd
 #      - run: ls -la
 #
+#      # job間で共有できるスペース
 #      - attach_workspace:
-#          at: /tmp/docker
-#      - setup_remote_docker
-#      - run: docker load -i /tmp/docker/image
+#          at: /tmp/flask_app
 #
+#     - run: cd /tmp/flask_app
 #      - run: pwd
 #      - run: ls -la
 #      - run: curl http://127.0.0.1:5000/
+#      - run: pytest
 
 workflows:
   build_test:
