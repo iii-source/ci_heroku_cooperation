@@ -8,7 +8,7 @@ jobs:
       - run:
           name: create tmp
           command: |
-            mkdir -p /tmp/flask_app
+            mkdir -p /tmp
       # 一時ファイルの永続化
       - persist_to_workspace:
           root: /tmp
