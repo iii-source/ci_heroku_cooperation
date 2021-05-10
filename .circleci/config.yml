@@ -15,8 +15,6 @@ jobs:
           paths:
             - flask_app
 
-#      - run: cd /tmp/flask_app
-
       - checkout
       - run: mv * /tmp/flask_app
       - run:
@@ -31,13 +29,6 @@ jobs:
             ls
       - run: pwd
       - run: ls -la
-#      - run:
-#          command: python server/app.py
-#          background: true
-
-#      - run: sleep 10
-#      - run: curl http://127.0.0.1:5000/
-#      - run: pytest
 
   api_test:
     docker:
@@ -50,28 +41,17 @@ jobs:
       - attach_workspace:
           at: /tmp/flask_app
 
+      - run: mv /tmp/flask_app/* .
+      - run: ls -la
       - run:
           command: |
-            cd /tmp/flask_app
-            pwd
-            ls -la
-            cd flask_app
-            ls -la
             python server/app.py
             sleep 10
+          background: true
+      - run:
+          command: |
             curl http://127.0.0.1:5000/
             pytest
-          background: true
-
-
-#      - run: pwd
-#      - run: ls -la
-#      - run:
-#          command: python server/app.py
-#          background: true
-#      - run: sleep 10
-#      - run: curl http://127.0.0.1:5000/
-#      - run: pytest
 
 workflows:
   build_test:
