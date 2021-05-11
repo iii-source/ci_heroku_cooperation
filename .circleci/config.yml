@@ -47,8 +47,11 @@ jobs:
           command: |
             cd /tmp/flask_app/
             ls -la
+            cd flask_app
+            ls -la
 
       - run: ls -la /tmp/flask_app
+      - run: ls -la /tmp/flask_app/flask_app
 
       - run: mv /tmp/flask_app/* .
       - run: ls -la
