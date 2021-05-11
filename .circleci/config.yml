@@ -10,10 +10,10 @@ jobs:
           command: |
             mkdir -p /tmp/flask_app
       # 一時ファイルの永続化
-      - persist_to_workspace:
-          root: /tmp
-          paths:
-            - flask_app
+#      - persist_to_workspace:
+#          root: /tmp
+#          paths:
+#            - flask_app
 
       - checkout
       - run: mv * /tmp/flask_app
@@ -31,6 +31,11 @@ jobs:
             ls
       - run: pwd
       - run: ls -la
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - flask_app
+
 
   api_test:
     docker:
