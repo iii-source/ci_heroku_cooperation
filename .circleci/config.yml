@@ -47,6 +47,7 @@ jobs:
 
       - run: mv /tmp/flask_app/* .
       - run: ls -la
+      - run: ls -la flask_app
 
       - run: mv flask_app/* .
       - run: ls -la
