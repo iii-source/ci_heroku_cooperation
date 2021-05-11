@@ -41,11 +41,11 @@ jobs:
 
       # job間で共有できるスペース
       - attach_workspace:
-          at: /tmp
+          at: /tmp/flask_app
 
       - run: ls -la
 
-      - run: mv /tmp/flask_app/* .
+      - run: mv /tmp/flask_app/flask_app/* .
       - run: ls -la
       - run:
           command: |
