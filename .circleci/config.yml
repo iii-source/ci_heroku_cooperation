@@ -43,6 +43,11 @@ jobs:
       - attach_workspace:
           at: /tmp/flask_app
 
+      - run:
+          command: |
+            cd /tmp/flask_app/
+            ls -la
+
       - run: ls -la /tmp/flask_app
 
       - run: mv /tmp/flask_app/* .
@@ -51,6 +56,11 @@ jobs:
 
       - run: mv flask_app/* .
       - run: ls -la
+
+      - run:
+          command: |
+            cd /tmp/flask_app/
+            ls -la
 
       - run:
           command: |
