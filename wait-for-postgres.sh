@@ -6,3 +6,5 @@ do
   echo "No response from db server"
   sleep 3
 done
+
+echo "Completed normally"
