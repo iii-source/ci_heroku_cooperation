@@ -18,3 +18,5 @@ do
 done
 
 echo "Completed normally"
+
+python3 server/app.py & python3 -m pytest
